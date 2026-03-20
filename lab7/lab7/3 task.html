@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch API Example</title>
+</head>
+<body>
+<input type="text" id="countyInput" placeholder="Введіть округ">
+<button onclick="findCounty()">Знайти код</button>
+<div id="result"></div>
+<script>
+    let counties = [];
+    //1. Асинхронна функція для отримання даних
+    async function fetchData() {
+        const response = await fetch("https://api.census.gov/data/2020/acs/acs5/profile?get=NAME&for=county:*");
+        const data = await response.json();
+//2. Перетворюємо у масив об'єктів
+        counties = data.slice(1).map(item => ({
+            name: item[0],
+            state: item[1],
+            county: item[2]
+        }));
+    }
+//3. Функція пошуку коду округу
+    function getCountyCode(name) {
+        const found = counties.find(c => c.name === name);
+        if (found) {
+            return found.state + found.county;
+        }
+        return "Не знайдено";
+    }
+    //  4. Обробка кнопки
+    function findCounty() {
+        const input = document.getElementById("countyInput").value;
+        const code = getCountyCode(input);
+        console.log(code);
+        document.getElementById("result").innerText = code;
+    }
+    // Викликаємо fetch при завантаженні
+    fetchData();
+</script>
+</body>
+</html>

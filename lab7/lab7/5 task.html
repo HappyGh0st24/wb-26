@@ -1,0 +1,23 @@
+<body>
+<div id="elid"></div>
+<button id="leftBtn">Вліво</button>
+<button id="rightBtn">Вправо</button>
+
+<script>
+    const box = document.getElementById("elid");
+    const leftBtn = document.getElementById("leftBtn");
+    const rightBtn = document.getElementById("rightBtn");
+
+    let position = 0;
+
+    leftBtn.addEventListener("click", () => {
+        position -= 100;
+        box.style.left = position + "px";
+    });
+
+    rightBtn.addEventListener("click", () => {
+        position += 100;
+        box.style.left = position + "px";
+    });
+</script>
+</body>

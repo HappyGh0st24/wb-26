@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+</head>
+<body>
+
+<form id="myForm">
+    <input type="text" id="first_name" placeholder="Ім'я"><br><br>
+    <input type="text" id="last_name" placeholder="Прізвище"><br><br>
+    <input type="email" id="email" placeholder="Email"><br><br>
+
+    <button type="submit">Відправити</button>
+</form>
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+        let firstName = document.getElementById("first_name").value;
+        let lastName = document.getElementById("last_name").value;
+        let email = document.getElementById("email").value;
+
+        // Перевірка
+        if (!firstName || !lastName || !email) {
+            alert("Будь ласка, заповніть всі поля!");
+            event.preventDefault(); // ❗ зупиняє відправку
+        } else {
+            alert("Дані:\nІм'я: " + firstName +
+                "\nПрізвище: " + lastName +
+                "\nEmail: " + email);
+        }
+    });
+</script>
+
+</body>
+</html>
